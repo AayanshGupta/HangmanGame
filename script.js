@@ -5,6 +5,8 @@ const newGameContainer = document.getElementById("new-game-container");
 const newGameButton = document.getElementById("new-game-button");
 const canvas = document.getElementById("canvas");
 const resultText = document.getElementById("result-text");
+const audio = document.getElementById("audio1");
+const audio2 = document.getElementById("audio2");
 
 //Options
 let options = {
@@ -69,6 +71,17 @@ const displayOptions = () => {
   }
   optionsContainer.appendChild(buttonCon);
 };
+
+function playaudio(){
+    audio.currentTime=0;
+    audio.play();
+}
+
+function playaudio2(){
+    audio2.currentTime=0;
+    audio2.play();
+}
+
 
 //Used for blocking the buttons not in use
 const blocker = () => {
@@ -148,6 +161,7 @@ const initializer = () => {
             if (winCount == charArray.length) {
               resultText.innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${Word}</span></p>`;
               //block all buttons
+              playaudio();
               blocker();
             }
           }
@@ -159,7 +173,9 @@ const initializer = () => {
         drawMan(count);
         //Count==6 because head,body,left arm, right arm,left leg,right leg
         if (count == 6) {
+            
           resultText.innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${Word}</span></p>`;
+          playaudio2();
           blocker();
         }
       }
@@ -175,6 +191,7 @@ const initializer = () => {
   //initialDrawing would draw the frame
   initialDrawing();
 };
+
 
 //Canvas
 const canvasCreator = () => {
